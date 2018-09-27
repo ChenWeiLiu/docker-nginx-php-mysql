@@ -44,7 +44,7 @@ services:
         container_name: ${MYSQL_HOST}
         restart: always
         env_file:
-            - ".env"
+            - ".env"    
         environment:
             - MYSQL_DATABASE=${MYSQL_DATABASE}
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -54,3 +54,16 @@ services:
             - "8989:3306"
         volumes:
             - "./data/db/mysql:/var/lib/mysql"
+    samba:
+        image: vimagick/samba
+        volumes:
+            - ./etc/samba/smb.conf:/etc/samba/smb.conf
+            - ./share:/share
+        ports:
+            - 139:139
+            - 445:445
+        # expose:
+        #     - 139
+        #     - 445
+        # tty: yes
+        restart: always
