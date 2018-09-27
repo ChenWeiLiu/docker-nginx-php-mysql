@@ -61,6 +61,4 @@ services:
             - "139:139"
             - "445:445"
         volumes:
-            - ./web:/mnt/pub
-        command:
-            "-s pub;/mnt/pub;no;no;no;foo -u foo;password"
+            - ./web:/share
