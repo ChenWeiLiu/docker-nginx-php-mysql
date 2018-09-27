@@ -55,15 +55,12 @@ services:
         volumes:
             - "./data/db/mysql:/var/lib/mysql"
     samba:
-        image: vimagick/samba
-        volumes:
-            - ./etc/samba/smb.conf:/etc/samba/smb.conf
-            - ./share:/share
+        image: dperson/samba
+        container_name: samba
         ports:
-            - 139:139
-            - 445:445
-        # expose:
-        #     - 139
-        #     - 445
-        # tty: yes
-        restart: always
+            - "139:139"
+            - "445:445"
+        volumes:
+            - ./web:/mnt/pub
+        command:
+            "-s pub;/mnt/pub;no;no;no;foo -u foo;password"
